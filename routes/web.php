@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\V1\AuthController;
+use App\Http\Controllers\Admin\AppController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,9 +15,7 @@ use App\Http\Controllers\V1\AuthController;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-});
+Route::get('/', [AppController::class, 'login'])->name('login');
 
 Route::post('login', [AuthController::class, 'authenticate']);
 
@@ -30,3 +29,8 @@ Route::prefix('view/admin')->group(function () {
     });
 });
 
+/** Views */
+Route::get('/view/admin/index', function () {
+    return view('usuarios/admin/index');
+});
+Route::get('/view/admin/vendedores/{token}', [AppController::class, 'vendedores'])->name('vendedores');

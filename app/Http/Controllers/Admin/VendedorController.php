@@ -3,10 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use JWTAuth;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Validator;
 
 class VendedorController extends Controller
 {
+    protected $user;
+    public function __construct(Request $request)
+    {
+        $token = $request->header('Authorization');
+        if($token != '')
+            $this->user = JWTAuth::parseToken()->authenticate();
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +27,7 @@ class VendedorController extends Controller
      */
     public function index()
     {
-        //
+        //$vendedores = User::where()
     }
 
     /**

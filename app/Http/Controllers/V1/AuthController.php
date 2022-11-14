@@ -19,12 +19,15 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request, SessionManager $sessionManager)
     {
-        if( User::where('email',request()->input('email')) )
-            return back()->with('success', 'El usuario ya existe.');
+        /* if( User::where('email',request()->input('email')) ){
+            $message = "El usuario ya existe.";
+            return view('usuarios/response-register', ['message'=>$message]);
+        }
 
-        if( request()->input('password') !== request()->input('password_confirmation') )
-            return back()->with('success', 'La confirmación de la contraseña es incorrecta.');
-        
+        if( request()->input('password') !== request()->input('password_confirmation') ){
+            $message = "La confirmación de la contraseña es incorrecta.";
+            return view('usuarios/response-register', ['message'=>$message]);
+        } */
         
         $user = User::create($request->validated());
         if( $user !== null){
@@ -32,7 +35,8 @@ class AuthController extends Controller
             try{
                 $token = JWTAuth::attempt($credentials);
                 $message = "Nuevo usuario registrado";
-                return back()->with('message', $message);
+                /* return back()->with('message', $message); */
+                return view('usuarios/response-register', ['token'=>$token,'message'=>$message]);
             } catch (JWTException $e) {
                 return response()->json([
                     'message' => 'Error',
@@ -41,13 +45,6 @@ class AuthController extends Controller
         }
 
         return back()->with('success', 'No se puede agregar al usuario solicitado.');
-        /* return response()->json([
-            'message' => 'User created',
-            'token' => JWTAuth::attempt($credentials),
-            'user' => $user
-        ], Response::HTTP_OK); */
-        /* return view('welcome', compact('token','message')); */
-
     }
     
     
@@ -85,7 +82,7 @@ class AuthController extends Controller
         $user = User::where('email',request()->input('email'));
         $perfil = Perfil::find($user->perfil_id);
 
-        return response()->view($perfil->view, ['token'=>$token, 'perfil'=>$user->perfil_id])
+        return response()->view($perfil->index, ['token'=>$token, 'perfil'=>$user->perfil_id])
             ->header('Authorization', 'Bearer '.$token);
     }
 
@@ -131,21 +128,4 @@ class AuthController extends Controller
             ], 401);
         return response()->json(['user' => $user]);
     }
-
-    /**
-     * Render view and send token for request auth.
-     */
-    /* public function viewhome()
-    {
-        return view('usuarios/index');
-    } */
-    /* public function viewhome($id)
-    {
-        $user = JWTAuth::authenticate($id);
-        if(!$user)
-            return response()->json([
-                'message' => 'Invalid token / token expired',
-            ], 401);
-        return view('usuarios/index');
-    } */
 }

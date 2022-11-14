@@ -9,6 +9,9 @@
 
 
 /* Contenedores */
+.container-frame{
+    margin-top: 170px;
+}
 .container-centered{
     width: 100%;
     height: 100vh;
@@ -22,19 +25,41 @@
 }
 
 
+.container-centered .img-user{
+    background-color: #FFF;
+    border-radius: 55px;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* NAV */
+.navbar-theone{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.nav-item{
+    margin: 10px!important;
+}
+.nav-link:hover{
+    color: #FFF;
+}
 
 /* Forms */
 .input-form-white{
     width: 95%;
     border: 0;
     border-bottom: 1px solid #FFF;
-    background-color: transparent;
+    background-color: transparent!important;
     margin: 8px;
     padding: 12px;
     text-align: center;
     color: #FFF;
 }
-input:focus {
+/* input:focus {
     border: 0;
     font-size: 14px;
     margin: 5px;
@@ -45,6 +70,15 @@ input:focus {
     border-bottom: 2px solid #FFF;
     font-weight: 600;
     background-color: #1db7ff;
+}
+input:-internal-autofill-selected{
+    background-color: transparent!important;
+}
+input:hover{
+    background-color: transparent;
+} */
+::placeholder{
+    color: #FFF;
 }
 
 /* Botones */
@@ -61,4 +95,15 @@ input:focus {
     .btn-primary-theone{
         width: 95%;
     }
+}
+
+
+
+/* Menus */
+.logo-header{
+    width: 190px;
+}
+.container-menu{
+    display: flex;
+    flex-direction: column;
 }

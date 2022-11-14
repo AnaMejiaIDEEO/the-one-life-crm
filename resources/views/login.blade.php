@@ -5,7 +5,9 @@
         <div class="container-centered">
             <div>
                 <div class="d-flex justify-content-center">
-                    <img src="{{ asset('img/perfil-del-usuario.png') }}" alt="" width="86">
+                    <div class="img-user">
+                        <img src="{{ asset('img/perfil-del-usuario.png') }}" alt="" width="86">
+                    </div>
                 </div>
                 <div>
                     <form id="form-inicio" class="my-5" method="POST" action="{{ url('/login') }}">

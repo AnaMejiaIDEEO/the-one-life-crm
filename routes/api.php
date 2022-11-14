@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\VendedorController;
 
 Route::prefix('v1/auth')->group(function () {
     // Acceso  /api/v1/*
+    Route::post('register', [AuthController::class, 'register']);
     Route::group(['middleware' => ['jwt.verify']], function() {
         Route::get('/admin/vendedores', [VendedorController::class, 'index'] );
         Route::post('logout', [AuthController::class, 'logout']);
